@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-DATE=`date | sed -r "s/[^ ]+ +([^ ]+)+ +([^ ]+)+ +[^ ]+ +[^ ]+ +[^ ]+ +([^ ]+)+/\3\1\2/"`
+DATE=`LANG="en_US.UTF-8" date | sed -r "s/[^ ]+ +([^ ]+)+ +([^ ]+)+ +[^ ]+ +[^ ]+ +[^ ]+ +([^ ]+)+/\3\1\2/"`
 
 # directory you want to store your daily reports
 ## $HOME/Documents is the path set by default.
