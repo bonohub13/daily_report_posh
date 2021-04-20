@@ -25,4 +25,4 @@
 > 上記の方法はpowershellを使っている人向けです
 
 ## Bashのバージョン
-> [ここ](https://github.com/bonohub13/daily_reports)
+> [ここ](https://github.com/bonohub13/daily_report)
