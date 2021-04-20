@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-DATE=`date | sed -r "s/[^ ]+ +([^ ]+)+ +([^ ]+)+ +[^ ]+ +[^ ]+ +[^ ]+ +[^ ]+/\1\2/"`
+DATE=`date | sed -r "s/[^ ]+ +([^ ]+)+ +([^ ]+)+ +[^ ]+ +[^ ]+ +[^ ]+ +([^ ]+)+/\3\1\2/"`
 
 # directory you want to store your daily reports
 ## $HOME/Documents is the path set by default.
@@ -39,7 +39,7 @@ main()
     init_filepath $2
     DATE=`get_month $1`
     FILENAME="$DATE.md"
-    sed "s/月日/${DATE:0:2}月${DATE:2:2}日/" $2/format.md | tee $2/$FILENAME
+    sed "s/年月日/${DATE:0:4}年${DATE:4:2}月${DATE:6:2}日/" $2/format.md | tee $2/$FILENAME
 }
 
 main $DATE $FILE_PATH
