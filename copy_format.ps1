@@ -3,7 +3,13 @@ $DATE = Get-Date -Format yyyymmdd
 # directory you want to store your daily reports
 ## $HOME/Documents is the path set by default.
 ## If you want something different feel free to change it to whatever you'd like
-$FILE_PATH=$HOME/Documents
+$SOURCE_PATH="NULL"
+if ( $SOURCE_PATH -match "NULL" ) {
+    echo "ERROR: file path not set for SOURCE_PATH!"
+    echo "Please set \$SOURCE_PATH to the directory where you cloned this repository"
+    echo "Example: C:\Users\user\daily_report_posh"
+}
+$TARGET_PATH=$HOME/Documents
 
 # create new directory if it doesn't exist
 function init_filepath ($FilePath) {
@@ -17,11 +23,11 @@ function init_filepath ($FilePath) {
 }
 
 # main function
-function main ($FilePath $Date) {
+function main ($SourcePath $FilePath $Date) {
     init_filepath -FilePath $FilePath
     $FileName="$Date.md"
     # replicating sed
-    Get-Content $FilePath | % { $_ -replace "年月日", "$Date.substring(0, 4)年$Date.substring(4, 2)月$Date.substring(6, 2)日" } | Set-Content $FilePath/$FileName
+    Get-Content $SourcePath/format.md | % { $_ -replace "年月日", "$Date.substring(0, 4)年$Date.substring(4, 2)月$Date.substring(6, 2)日" } | Set-Content $FilePath/$FileName
 }
 
-main -FilePath $FILE_PATH -Date $DATE
+main -SourcePath $SOURCE_PATH -FilePath $FILE_PATH -Date $DATE
