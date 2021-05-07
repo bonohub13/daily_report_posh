@@ -26,8 +26,13 @@ function init_filepath ($FilePath) {
 function main ($SourcePath $FilePath $Date) {
     init_filepath -FilePath $FilePath
     $FileName="$Date.md"
+    # formatting DD part to make it have the length 2
+    $DD=$Date.substring(6, 2)
+    if ( $DD.length -lt 2 ) {
+        $DD="0$DD"
+    }
     # replicating sed
-    Get-Content $SourcePath/format.md | % { $_ -replace "年月日", "$Date.substring(0, 4)年$Date.substring(4, 2)月$Date.substring(6, 2)日" } | Set-Content $FilePath/$FileName
+    Get-Content $SourcePath/format.md | % { $_ -replace "年月日", "$Date.substring(0, 4)年$Date.substring(4, 2)月$DD日" } | Set-Content $FilePath/$FileName
 }
 
 main -SourcePath $SOURCE_PATH -FilePath $FILE_PATH -Date $DATE
